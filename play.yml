@@ -42,7 +42,7 @@
       apt: name=mysql-server
     - name: ustanovka modlja dlja importa sql dump
       apt: name=python3-pymysql
-      
+
     - name: Restore database
       mysql_db:
 #        become: yes
@@ -55,3 +55,6 @@
         name: mailserver
         state: import
         target: /home/ubuntu/conf_files/test.sql
+
+
+        uxinla;sjf;as
