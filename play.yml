@@ -42,6 +42,7 @@
       apt: name=mysql-server
     - name: ustanovka modlja dlja importa sql dump
       apt: name=python3-pymysql
+      
     - name: Restore database
       mysql_db:
 #        become: yes
@@ -49,6 +50,7 @@
 #        mysql_user:
 #          login-user: root
 #          login_password: balticom
+
         login_unix_socket: /var/run/mysqld/mysqld.sock
         name: mailserver
         state: import
