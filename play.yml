@@ -7,6 +7,12 @@
       service:
           name: nginx
           state: started
+
+#    - name: restart time
+#      systemd:
+#         name: timesyncd
+#        state: restarted
+
     - name: restart time (perezagruzka)
       shell:
         cmd: sudo systemctl restart systemd-timesyncd.service
@@ -14,3 +20,36 @@
       apt: name=php-fpm
     - name: ustanovka sql
       apt: name=php-mysql
+#    - name: sozdaem direktoriju dlja hosta
+#      shell:
+#        cmd: sudo mkdir /var/www/your_domain
+    - name: komanda ctobi direktorija otkrivalasj
+      shell:
+        cmd: sudo chown -R $USER:$USER /var/www/your_domain
+    - name: kopiruem gotovij konfiguracionnij fail
+      shell:
+        cmd: sudo cp /home/ubuntu/conf_files/your_domain /etc/nginx/sites-available/
+    - name: kopiruem index fail
+      shell:
+        cmd: sudo cp /home/ubuntu/conf_files/index.htm /var/www/your_domain
+#    - name: aktiviruem host
+#      shell:
+#        cmd: sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+    - name: restart time (perezagruzka nginx)
+      shell:
+        cmd: sudo systemctl reload nginx
+    - name: ustanovka mysql
+      apt: name=mysql-server
+    - name: ustanovka modlja dlja importa sql dump
+      apt: name=python3-pymysql
+    - name: Restore database
+      mysql_db:
+#        become: yes
+#        become_method: sudo
+#        mysql_user:
+#          login-user: root
+#          login_password: balticom
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: mailserver
+        state: import
+        target: /home/ubuntu/conf_files/test.sql
