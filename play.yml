@@ -51,18 +51,19 @@
         group: root
         state: link
 
-
-  
+  #   - name: kopiruem index fail
+    - name: If follow=yes, /path/to/file will be overwritten 
+      copy:
+        src: /home/ubuntu/conf_files/index.htm
+        dest: /var/www/your_domain
+        follow: yes
  
- #   - name: kopiruem index fail
-  #    shell:
-  #      cmd: sudo cp /home/ubuntu/conf_files/index.htm /var/www/your_domain
-#    - name: aktiviruem host
-#      shell:
-#        cmd: sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
-    - name: restart time (perezagruzka nginx)
-      shell:
-        cmd: sudo systemctl reload nginx
+
+ 
+ 
+ #   - name: restart time (perezagruzka nginx)
+ #     shell:
+ #       cmd: sudo systemctl reload nginx
 
 
     - name: ustanovka mysql
