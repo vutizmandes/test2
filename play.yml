@@ -45,8 +45,8 @@
   # sozdaem link 
     - name: Create a symbolic link
       file:
-        src: /etc/nginx/sites-available/your_domain/
-        dest: /etc/nginx/sites-enabled/
+        src: /etc/nginx/sites-available/your_domain
+        dest: /etc/nginx/sites-enabled
         state: link
 
   #   - name: kopiruem index fail
