@@ -48,6 +48,7 @@
         src: /etc/nginx/sites-available/your_domain
         dest: /etc/nginx/sites-enabled
         state: link
+        force: yes
 
   #   - name: kopiruem index fail
     - name: If follow=yes, /path/to/file will be overwritten 
