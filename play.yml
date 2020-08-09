@@ -43,18 +43,11 @@
     - name: ustanovka modlja dlja importa sql dump
       apt: name=python3-pymysql
 
+#iz faila bekapa test.sql impotiruem bazu dannih s gotovoi strukturoi postfix bazi dannih
     - name: Restore database
       mysql_db:
-#        become: yes
-#        become_method: sudo
-#        mysql_user:
-#          login-user: root
-#          login_password: balticom
-
         login_unix_socket: /var/run/mysqld/mysqld.sock
         name: mailserver
         state: import
         target: /home/ubuntu/conf_files/test.sql
 
-
-        uxinla;sjf;as
