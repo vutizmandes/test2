@@ -35,27 +35,30 @@
         state: directory
         mode: '0755'
 
+# kopiruem nginx konfiguracionnij fail
+    - name: If follow=yes, /path/to/file will be overwritten 
+      copy:
+        src: /home/ubuntu/conf_files/your_domain
+        dest: /etc/nginx/sites-available/
+        follow: yes
 
 
+  
+ #   - name: kopiruem gotovij konfiguracionnij fail
+  #    shell:
+  #      cmd: sudo cp /home/ubuntu/conf_files/your_domain /etc/nginx/sites-available/
 
-#    - name: sozdaem direktoriju dlja hosta
-#      shell:
-#        cmd: sudo mkdir /var/www/your_domain
-    - name: komanda ctobi direktorija otkrivalasj
-      shell:
-        cmd: sudo chown -R $USER:$USER /var/www/your_domain
-    - name: kopiruem gotovij konfiguracionnij fail
-      shell:
-        cmd: sudo cp /home/ubuntu/conf_files/your_domain /etc/nginx/sites-available/
-    - name: kopiruem index fail
-      shell:
-        cmd: sudo cp /home/ubuntu/conf_files/index.htm /var/www/your_domain
+ #   - name: kopiruem index fail
+  #    shell:
+  #      cmd: sudo cp /home/ubuntu/conf_files/index.htm /var/www/your_domain
 #    - name: aktiviruem host
 #      shell:
 #        cmd: sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
     - name: restart time (perezagruzka nginx)
       shell:
         cmd: sudo systemctl reload nginx
+
+
     - name: ustanovka mysql
       apt: name=mysql-server
     - name: ustanovka modlja dlja importa sql dump
