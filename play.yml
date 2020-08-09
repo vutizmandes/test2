@@ -5,7 +5,8 @@
 #pered ustanovkoi paketov i ostalnogo, obnovlajem paketi
     - name: Update apt-get repo and cache
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
-    
+
+# ustanovka poslednei versii nginx, takze zapuskaetsa sam serviss    
     - name: ensure nginx is at the latest version
       apt: name=nginx state=latest
     - name: start nginx
@@ -13,18 +14,30 @@
           name: nginx
           state: started
 
-#    - name: restart time
-#      systemd:
-#         name: timesyncd
-#        state: restarted
+# primer perezagruzki servisa, vdanom slucaje perezapskaem serviss vremeni
+#    - name: restart time (perezagruzka)
+#      shell:
+#        cmd: sudo systemctl restart systemd-timesyncd.service
+# eto plohoi stilj, poetomu budu shell polzovatsa, tolko v isklucitelnih slucahah
 
-    - name: restart time (perezagruzka)
-      shell:
-        cmd: sudo systemctl restart systemd-timesyncd.service
+# ustanovka php-fpm
     - name: ustanovka php fpm
       apt: name=php-fpm
+
+# ustanovka php-mysql
     - name: ustanovka sql
       apt: name=php-mysql
+
+# sozdaem direktoriju /var/www/your_domain
+    - name: Create a directory if it does not exist
+      file:
+        path: /var/www/your_domain
+        state: directory
+        mode: '0755'
+
+
+
+
 #    - name: sozdaem direktoriju dlja hosta
 #      shell:
 #        cmd: sudo mkdir /var/www/your_domain
@@ -55,4 +68,5 @@
         name: mailserver
         state: import
         target: /home/ubuntu/conf_files/test.sql
+
 
