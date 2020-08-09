@@ -47,8 +47,6 @@
       file:
         src: /etc/nginx/sites-available/your_domain
         dest: /etc/nginx/sites-enabled
-        owner: root
-        group: root
         state: link
 
   #   - name: kopiruem index fail
